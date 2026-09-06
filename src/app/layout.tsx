@@ -1,28 +1,34 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://miguelacm.es/tools/diff-checker";
+
 export const metadata: Metadata = {
-  title: "Diff Checker — Comparador de Texto | miguelacm.es",
-  description: "Compara dos textos línea a línea y resalta las diferencias. Sin registro, 100% en el navegador.",
+  metadataBase: new URL(SITE_URL),
+  title: { default: "Diff Checker — Free Online Tool", template: "%s | Diff Checker" },
+  description: "Compare two texts and highlight line-by-line differences. Green added, red removed.",
+  authors: [{ name: "Miguel Ángel Colorado Marin", url: "https://miguelacm.es" }],
+  creator: "Miguel Ángel Colorado Marin",
+  openGraph: { title: "Diff Checker — Free Online Tool", description: "Compare two texts and highlight line-by-line differences. Green added, red removed.", url: SITE_URL, siteName: "Diff Checker — MACM", type: "website" },
+  twitter: { card: "summary_large_image", title: "Diff Checker — Free Online Tool", description: "Compare two texts and highlight line-by-line differences. Green added, red removed." },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es">
+    <html lang="en">
       <head>
         <link rel="author" href="https://miguelacm.es" />
+        <meta name="author" content="Miguel Ángel Colorado Marin" />
+        <meta name="copyright" content="Miguel Ángel Colorado Marin — miguelacm.es" />
       </head>
-      <body>
+      <body className="antialiased">
         {children}
-        <footer style={{ textAlign: "center", padding: "2rem", fontSize: "0.75rem", color: "var(--color-text-muted)" }}>
-          Creado por{" "}
-          <a href="https://miguelacm.es" style={{ color: "var(--color-primary)" }}>
-            Miguel Ángel Colorado Marin (MACM)
-          </a>{" "}
-          ·{" "}
-          <a href="https://github.com/m-a-c-m/DiffChecker" style={{ color: "var(--color-primary)" }}>
-            GitHub
-          </a>
+        <footer className="pb-8 text-center text-xs text-text-muted/40">
+          ⚡ by{" "}
+          <a href="https://miguelacm.es" target="_blank" rel="noopener noreferrer" className="text-text-muted/60 transition-colors hover:text-text-muted underline-offset-2 hover:underline">MACM · miguelacm.es</a>
+          {" · "}
+          <a href="https://github.com/m-a-c-m/DiffChecker" target="_blank" rel="noopener noreferrer" className="text-text-muted/60 transition-colors hover:text-text-muted underline-offset-2 hover:underline">Open source</a>
         </footer>
       </body>
     </html>

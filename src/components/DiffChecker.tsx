@@ -169,14 +169,14 @@ export default function DiffChecker({ locale = "es" }: Props) {
     <div className="w-full max-w-6xl mx-auto space-y-6">
       {/* Header */}
       <div className="flex items-center gap-3">
-        <span className="p-2 rounded-lg bg-[#a78bfa]/10 text-[#a78bfa]">
+        <span className="p-2 rounded-lg bg-primary/10 text-primary">
           <MdCompareArrows size={28} />
         </span>
         <div>
           <h2 className="text-xl font-bold text-white">
             {isEs ? "Comparador de Texto" : "Diff Checker"}
           </h2>
-          <p className="text-sm text-zinc-400">
+          <p className="text-sm text-text-muted">
             {isEs
               ? "Compara dos textos y visualiza las diferencias línea a línea"
               : "Compare two texts and visualize line-by-line differences"}
@@ -189,13 +189,13 @@ export default function DiffChecker({ locale = "es" }: Props) {
         {/* Original */}
         <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between">
-            <label className="text-sm font-semibold text-zinc-300">
+            <label className="text-sm font-semibold text-text-muted">
               {isEs ? "Original" : "Original"}
             </label>
             {original && (
               <button
                 onClick={() => setOriginal("")}
-                className="text-xs text-zinc-500 hover:text-zinc-300 transition"
+                className="text-xs text-text-muted/60 hover:text-text-muted transition"
               >
                 {isEs ? "Limpiar" : "Clear"}
               </button>
@@ -207,9 +207,9 @@ export default function DiffChecker({ locale = "es" }: Props) {
             placeholder={isEs ? "Pega el texto original aquí…" : "Paste the original text here…"}
             rows={12}
             spellCheck={false}
-            className="w-full resize-y p-3 rounded-lg bg-zinc-800/60 border border-zinc-700/50 text-white placeholder:text-zinc-600 focus:outline-none focus:border-[#a78bfa]/50 focus:ring-1 focus:ring-[#a78bfa]/30 text-sm font-mono leading-relaxed transition"
+            className="w-full resize-y p-3 rounded-lg bg-surface/60 border border-border/40 text-white placeholder:text-text-muted/40 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30 text-sm font-mono leading-relaxed transition"
           />
-          <p className="text-xs text-zinc-600 text-right">
+          <p className="text-xs text-text-muted/40 text-right">
             {original.split("\n").length.toLocaleString()} {isEs ? "líneas" : "lines"}
           </p>
         </div>
@@ -217,13 +217,13 @@ export default function DiffChecker({ locale = "es" }: Props) {
         {/* Modified */}
         <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between">
-            <label className="text-sm font-semibold text-zinc-300">
+            <label className="text-sm font-semibold text-text-muted">
               {isEs ? "Modificado" : "Modified"}
             </label>
             {modified && (
               <button
                 onClick={() => setModified("")}
-                className="text-xs text-zinc-500 hover:text-zinc-300 transition"
+                className="text-xs text-text-muted/60 hover:text-text-muted transition"
               >
                 {isEs ? "Limpiar" : "Clear"}
               </button>
@@ -235,9 +235,9 @@ export default function DiffChecker({ locale = "es" }: Props) {
             placeholder={isEs ? "Pega el texto modificado aquí…" : "Paste the modified text here…"}
             rows={12}
             spellCheck={false}
-            className="w-full resize-y p-3 rounded-lg bg-zinc-800/60 border border-zinc-700/50 text-white placeholder:text-zinc-600 focus:outline-none focus:border-[#a78bfa]/50 focus:ring-1 focus:ring-[#a78bfa]/30 text-sm font-mono leading-relaxed transition"
+            className="w-full resize-y p-3 rounded-lg bg-surface/60 border border-border/40 text-white placeholder:text-text-muted/40 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30 text-sm font-mono leading-relaxed transition"
           />
-          <p className="text-xs text-zinc-600 text-right">
+          <p className="text-xs text-text-muted/40 text-right">
             {modified.split("\n").length.toLocaleString()} {isEs ? "líneas" : "lines"}
           </p>
         </div>
@@ -256,7 +256,7 @@ export default function DiffChecker({ locale = "es" }: Props) {
               <span className="text-xs font-bold">−</span>
               {stats.removed} {isEs ? "eliminadas" : "removed"}
             </span>
-            <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-zinc-800/60 border border-zinc-700/30 text-zinc-400 font-medium">
+            <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-surface/60 border border-border/20 text-text-muted font-medium">
               <span className="text-xs font-bold">=</span>
               {stats.unchanged} {isEs ? "sin cambios" : "unchanged"}
             </span>
@@ -265,10 +265,10 @@ export default function DiffChecker({ locale = "es" }: Props) {
           {/* Actions */}
           <div className="flex items-center gap-2">
             {/* Line numbers toggle */}
-            <label className="flex items-center gap-2 cursor-pointer text-sm text-zinc-400 hover:text-zinc-200 transition select-none">
+            <label className="flex items-center gap-2 cursor-pointer text-sm text-text-muted hover:text-white transition select-none">
               <div
                 onClick={() => setShowLineNumbers((v) => !v)}
-                className={`relative w-8 h-4 rounded-full transition ${showLineNumbers ? "bg-[#a78bfa]" : "bg-zinc-700"}`}
+                className={`relative w-8 h-4 rounded-full transition ${showLineNumbers ? "bg-primary" : "bg-border/40"}`}
               >
                 <span className={`absolute top-0.5 w-3 h-3 rounded-full bg-white transition-all ${showLineNumbers ? "left-4.5" : "left-0.5"}`} />
               </div>
@@ -280,7 +280,7 @@ export default function DiffChecker({ locale = "es" }: Props) {
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-sm font-medium transition ${
                 copied
                   ? "border-emerald-500/40 bg-emerald-900/30 text-emerald-300"
-                  : "border-zinc-600/40 bg-zinc-800/60 text-zinc-300 hover:text-white hover:border-zinc-500/50"
+                  : "border-border/40 bg-surface/60 text-text-muted hover:text-white hover:border-border/60"
               }`}
             >
               {copied ? <FiCheck size={14} /> : <FiCopy size={14} />}
@@ -289,7 +289,7 @@ export default function DiffChecker({ locale = "es" }: Props) {
 
             <button
               onClick={handleDownload}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#a78bfa]/30 bg-[#a78bfa]/10 text-[#a78bfa] hover:bg-[#a78bfa]/20 text-sm font-medium transition"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-primary/30 bg-primary/10 text-primary hover:bg-primary/20 text-sm font-medium transition"
             >
               <FiDownload size={14} />
               {isEs ? "Descargar .diff" : "Download .diff"}
@@ -300,7 +300,7 @@ export default function DiffChecker({ locale = "es" }: Props) {
 
       {/* Diff output */}
       {isEmpty && (
-        <div className="flex flex-col items-center justify-center py-16 rounded-xl border-2 border-dashed border-zinc-700/40 text-zinc-600 gap-3">
+        <div className="flex flex-col items-center justify-center py-16 rounded-xl border-2 border-dashed border-border/40 text-text-muted/40 gap-3">
           <MdCompareArrows size={40} />
           <p className="text-sm text-center">
             {isEs
@@ -325,13 +325,13 @@ export default function DiffChecker({ locale = "es" }: Props) {
       )}
 
       {hasDiff && diffLines2 && (
-        <div className="rounded-xl border border-zinc-700/40 bg-zinc-900/60 overflow-hidden">
+        <div className="rounded-xl border border-border/40 bg-surface/80 overflow-hidden">
           {/* Output header */}
-          <div className="flex items-center justify-between px-4 py-2.5 border-b border-zinc-700/40 bg-zinc-800/60">
-            <span className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">
+          <div className="flex items-center justify-between px-4 py-2.5 border-b border-border/40 bg-surface/60">
+            <span className="text-xs font-semibold text-text-muted uppercase tracking-wider">
               {isEs ? "Resultado" : "Result"}
             </span>
-            <span className="text-xs text-zinc-600">
+            <span className="text-xs text-text-muted/40">
               {diffLines2.length.toLocaleString()} {isEs ? "líneas totales" : "total lines"}
             </span>
           </div>
@@ -344,7 +344,7 @@ export default function DiffChecker({ locale = "es" }: Props) {
 
               let rowBg = "";
               let prefix = "  ";
-              let textColor = "text-zinc-400";
+              let textColor = "text-text-muted";
 
               if (isAdd) {
                 rowBg = "bg-emerald-900/25 hover:bg-emerald-900/35";
@@ -355,18 +355,18 @@ export default function DiffChecker({ locale = "es" }: Props) {
                 prefix = "- ";
                 textColor = "text-red-300";
               } else {
-                rowBg = "hover:bg-zinc-800/30";
+                rowBg = "hover:bg-surface/30";
               }
 
               return (
                 <div key={idx} className={`flex items-start group transition ${rowBg}`}>
                   {/* Line numbers */}
                   {showLineNumbers && (
-                    <div className="flex shrink-0 select-none border-r border-zinc-700/40">
-                      <span className="w-12 text-right px-2 py-0.5 text-[11px] text-zinc-600">
+                    <div className="flex shrink-0 select-none border-r border-border/40">
+                      <span className="w-12 text-right px-2 py-0.5 text-[11px] text-text-muted/40">
                         {line.origIndex ?? ""}
                       </span>
-                      <span className="w-12 text-right px-2 py-0.5 text-[11px] text-zinc-600">
+                      <span className="w-12 text-right px-2 py-0.5 text-[11px] text-text-muted/40">
                         {line.modIndex ?? ""}
                       </span>
                     </div>

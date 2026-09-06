@@ -1,119 +1,71 @@
-import DiffChecker from "../components/DiffChecker";
+import type { Metadata } from "next";
+import Tool from "@/components/DiffChecker";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://miguelacm.es/tools/diff-checker";
+const EMBED_URL = process.env.NEXT_PUBLIC_EMBED_URL || "https://miguelacm.es/embed/diff-checker";
+
+export const metadata: Metadata = {
+  title: "Diff Checker — Free Online Tool",
+  description: "Compare two texts and highlight line-by-line differences. Green added, red removed.",
+  alternates: { canonical: SITE_URL },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Diff Checker",
+  url: SITE_URL,
+  description: "Compare two texts and highlight line-by-line differences. Green added, red removed.",
+  applicationCategory: "UtilityApplication",
+  operatingSystem: "Web",
+  inLanguage: "en",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
+  author: { "@type": "Person", name: "Miguel Ángel Colorado Marin", url: "https://miguelacm.es" },
+};
 
 export default function Home() {
   return (
-    <main style={{ minHeight: "100vh", padding: "2rem 1rem", maxWidth: "960px", margin: "0 auto" }}>
-      <header style={{ textAlign: "center", marginBottom: "2rem" }}>
-        <h1 style={{ fontSize: "2rem", fontWeight: "bold", color: "var(--color-text)", marginBottom: "0.5rem" }}>
-          Diff Checker — Comparador de Texto
-        </h1>
-        <p style={{ color: "var(--color-text-muted)" }}>
-          Compara dos textos línea a línea y resalta las diferencias. Sin registro, 100% en el navegador.
-        </p>
-      </header>
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <main className="min-h-screen px-4 py-12">
+        <div className="mx-auto max-w-4xl">
+          <div className="mb-10 text-center">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-sm text-primary">Free tool · Open source</div>
+            <h1 className="mb-3 text-4xl font-bold text-white md:text-5xl">Diff Checker</h1>
+            <p className="mb-2 text-lg text-text-muted">Compare two texts and highlight line-by-line differences. Green added, red removed.</p>
+            <p className="text-sm text-text-muted/60">By{" "}<a href="https://miguelacm.es" target="_blank" rel="noopener noreferrer" className="gradient-text font-medium hover:opacity-80 transition-opacity">MACM</a>{" "}· No sign-up · No ads</p>
+          </div>
 
-      <div style={{ background: "var(--color-surface)", borderRadius: "1rem", border: "1px solid var(--color-border)", padding: "1.5rem", marginBottom: "2rem" }}>
-        <DiffChecker />
-      </div>
+          <div className="glass rounded-2xl border border-border/20 p-6 md:p-8"><Tool locale="en" /></div>
 
-      {/* Cómo usar */}
-      <section style={{ marginBottom: "2rem", background: "var(--color-surface)", borderRadius: "1rem", border: "1px solid var(--color-border)", padding: "1.5rem" }}>
-        <h2 style={{ fontSize: "1.25rem", fontWeight: "bold", color: "var(--color-text)", marginBottom: "1rem" }}>
-          Cómo usar / How to use
-        </h2>
-        <ol style={{ paddingLeft: "1.25rem", color: "var(--color-text-muted)", lineHeight: "2" }}>
-          <li>
-            <strong style={{ color: "var(--color-text)" }}>Pega el texto original</strong> en el campo izquierdo («Original»). Puede ser código, documentación, JSON, o cualquier texto plano.
-          </li>
-          <li>
-            <strong style={{ color: "var(--color-text)" }}>Pega el texto modificado</strong> en el campo derecho («Modificado»). Puede tener líneas añadidas, eliminadas o iguales.
-          </li>
-          <li>
-            <strong style={{ color: "var(--color-text)" }}>Visualiza el diff en tiempo real</strong>: las líneas añadidas se muestran en verde (+), las eliminadas en rojo (−) y las sin cambios en gris.
-          </li>
-          <li>
-            <strong style={{ color: "var(--color-text)" }}>Descarga el resultado</strong> como archivo <code style={{ background: "var(--color-border)", padding: "0 4px", borderRadius: "3px" }}>.diff</code> o cópialo al portapapeles con un solo clic.
-          </li>
-        </ol>
-      </section>
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+            {[
+            { icon: "🟩", title: "Line diff", desc: "Added lines in green, removed in red, side by side." },
+            { icon: "📥", title: "Downloadable", desc: "Export the diff as a file when you are done." },
+            { icon: "🔒", title: "100% private", desc: "Comparison runs locally in your browser." },
+            ].map((item) => (
+              <div key={item.icon + item.title} className="glass rounded-xl border border-border/15 p-5">
+                <span className="mb-3 block text-2xl">{item.icon}</span>
+                <h3 className="mb-1 font-semibold text-white">{item.title}</h3>
+                <p className="text-sm text-text-muted leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
 
-      {/* FAQ */}
-      <section style={{ marginBottom: "2rem", background: "var(--color-surface)", borderRadius: "1rem", border: "1px solid var(--color-border)", padding: "1.5rem" }}>
-        <h2 style={{ fontSize: "1.25rem", fontWeight: "bold", color: "var(--color-text)", marginBottom: "1rem" }}>
-          Preguntas frecuentes / FAQ
-        </h2>
-
-        <div style={{ marginBottom: "1rem" }}>
-          <h3 style={{ color: "var(--color-text)", fontWeight: "600", marginBottom: "0.25rem" }}>
-            ¿Qué es un diff?
-          </h3>
-          <p style={{ color: "var(--color-text-muted)", lineHeight: "1.6" }}>
-            Un «diff» es la diferencia entre dos versiones de un texto. Muestra exactamente qué líneas han sido añadidas, eliminadas o permanecen sin cambios entre la versión original y la modificada. Es una herramienta fundamental en el desarrollo de software para revisar cambios en código.
-          </p>
+          <div className="mt-8 rounded-xl border border-border/20 bg-white/3 p-6">
+            <h2 className="mb-2 font-semibold text-white">Embed this tool on your website</h2>
+            <p className="mb-4 text-sm text-text-muted">Add Diff Checker to any page with a simple iframe, or link to it with attribution.</p>
+            <div className="mb-3 rounded-lg bg-black/40 p-3">
+              <p className="mb-1 text-xs text-text-muted/60">Iframe (plug & play):</p>
+              <code className="text-xs text-green-400 break-all">{`<iframe src="${EMBED_URL}" width="100%" height="700" style="border:none;border-radius:12px;" title="Diff Checker — miguelacm.es" loading="lazy"></iframe>`}</code>
+            </div>
+            <div className="rounded-lg bg-black/40 p-3">
+              <p className="mb-1 text-xs text-text-muted/60">Link with attribution (recommended for backlink):</p>
+              <code className="text-xs text-green-400 break-all">{`<a href="${SITE_URL}" target="_blank" rel="noopener">Diff Checker — free tool by MACM</a>`}</code>
+            </div>
+          </div>
         </div>
-
-        <div style={{ marginBottom: "1rem" }}>
-          <h3 style={{ color: "var(--color-text)", fontWeight: "600", marginBottom: "0.25rem" }}>
-            ¿Qué significan los colores verde y rojo?
-          </h3>
-          <p style={{ color: "var(--color-text-muted)", lineHeight: "1.6" }}>
-            Las líneas en <strong style={{ color: "#6ee7b7" }}>verde (+)</strong> son líneas nuevas que aparecen en el texto modificado pero no en el original. Las líneas en <strong style={{ color: "#fca5a5" }}>rojo (−)</strong> son líneas que existían en el original pero han sido eliminadas. Las líneas en gris sin prefijo son idénticas en ambos textos.
-          </p>
-        </div>
-
-        <div style={{ marginBottom: "1rem" }}>
-          <h3 style={{ color: "var(--color-text)", fontWeight: "600", marginBottom: "0.25rem" }}>
-            ¿Puedo comparar código fuente?
-          </h3>
-          <p style={{ color: "var(--color-text-muted)", lineHeight: "1.6" }}>
-            Sí, el comparador funciona con cualquier texto plano: código JavaScript, Python, HTML, CSS, JSON, YAML, Markdown, archivos de configuración, documentos de texto, etc. El algoritmo LCS (Longest Common Subsequence) garantiza un diff preciso e idéntico al que genera Git.
-          </p>
-        </div>
-
-        <div style={{ marginBottom: "1rem" }}>
-          <h3 style={{ color: "var(--color-text)", fontWeight: "600", marginBottom: "0.25rem" }}>
-            ¿Hay un límite de tamaño?
-          </h3>
-          <p style={{ color: "var(--color-text-muted)", lineHeight: "1.6" }}>
-            La herramienta soporta hasta 5.000 líneas por texto para garantizar un rendimiento fluido en el navegador. Si necesitas comparar textos más grandes, te recomendamos usar Git diff en tu terminal local o dividir el contenido en fragmentos más pequeños.
-          </p>
-        </div>
-
-        <div>
-          <h3 style={{ color: "var(--color-text)", fontWeight: "600", marginBottom: "0.25rem" }}>
-            ¿Mi texto se envía a algún servidor?
-          </h3>
-          <p style={{ color: "var(--color-text-muted)", lineHeight: "1.6" }}>
-            No. Todo el procesamiento ocurre íntegramente en tu navegador. No se envía ningún dato a ningún servidor externo. Puedes incluso usar la herramienta sin conexión a internet una vez que la página ha cargado. Tu texto nunca abandona tu dispositivo.
-          </p>
-        </div>
-      </section>
-
-      {/* Embed */}
-      <section style={{ background: "var(--color-surface)", borderRadius: "1rem", border: "1px solid var(--color-border)", padding: "1.5rem" }}>
-        <h2 style={{ fontSize: "1.25rem", fontWeight: "bold", color: "var(--color-text)", marginBottom: "0.5rem" }}>
-          Embed on your website
-        </h2>
-        <p style={{ color: "var(--color-text-muted)", marginBottom: "1rem", fontSize: "0.875rem" }}>
-          Embed this Diff Checker on any website using an iframe — no installation required.
-        </p>
-        <pre style={{ background: "var(--color-bg)", border: "1px solid var(--color-border)", borderRadius: "0.5rem", padding: "1rem", overflowX: "auto", fontSize: "0.8rem", color: "var(--color-text-muted)", lineHeight: "1.6" }}>
-{`<iframe
-  src="https://miguelacm.es/embed/diff-checker"
-  width="100%"
-  height="700"
-  style="border:none;border-radius:12px;"
-  title="Diff Checker — miguelacm.es"
-  loading="lazy"
-></iframe>`}
-        </pre>
-        <p style={{ marginTop: "0.75rem", fontSize: "0.8rem", color: "var(--color-text-muted)" }}>
-          💡 Consider adding a link attribution:{" "}
-          <a href="https://miguelacm.es/tools/diff-checker" style={{ color: "var(--color-primary)" }}>
-            Diff Checker by MACM
-          </a>
-        </p>
-      </section>
-    </main>
+      </main>
+    </>
   );
 }
